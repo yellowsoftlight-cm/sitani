@@ -16,30 +16,7 @@
 <body>
 
   <!-- ============ NAVBAR ============ -->
-  <header class="st-nav">
-    <div class="st-container st-nav__inner">
-      <a href="{{ url('/') }}" class="st-nav__brand">
-        <span class="st-nav__mark">SiTani</span>
-        <span class="st-nav__tag">Sistem Tani</span>
-      </a>
-
-      <nav class="st-nav__links" id="stNavLinks">
-        <a href="#alur">Alur Kerja</a>
-        <a href="#peran">Peran</a>
-        <a href="#fitur">Fitur</a>
-      </nav>
-
-      <div class="st-nav__actions">
-        <a href="{{ route('login') ?? '#' }}" class="st-btn st-btn--ghost">Masuk</a>
-        <a href="{{ route('register') ?? '#' }}" class="st-btn st-btn--solid">Daftar Kelompok</a>
-      </div>
-
-      <button class="st-nav__toggle" id="stNavToggle" aria-label="Buka menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
+<x-navbar />
   <main>
     <!-- ============ HERO ============ -->
     <section class="st-hero">
@@ -237,30 +214,7 @@
   </main>
 
   <!-- ============ FOOTER ============ -->
-  <footer class="st-footer">
-    <div class="st-container st-footer__inner">
-      <div>
-        <span class="st-nav__mark st-nav__mark--light">SiTani</span>
-        <p>Sistem manajemen kelompok tani — pendaftaran, panen, distribusi, dan bagi hasil dalam satu tempat.</p>
-      </div>
-      <div class="st-footer__cols">
-        <div>
-          <h5>Navigasi</h5>
-          <a href="#peran">Peran Pengguna</a>
-          <a href="#alur">Alur Kerja</a>
-          <a href="#fitur">Fitur</a>
-        </div>
-        <div>
-          <h5>Akun</h5>
-          <a href="{{ route('login') ?? '#' }}">Masuk</a>
-          <a href="{{ route('register') ?? '#' }}">Daftar Kelompok</a>
-        </div>
-      </div>
-    </div>
-    <div class="st-container st-footer__bottom">
-      <span>© {{ date('Y') }} SiTani. Seluruh hak cipta dilindungi.</span>
-    </div>
-  </footer>
+<x-footer />
 
   <script src="{{ asset('js/main.js') }}"></script>
 </body>
