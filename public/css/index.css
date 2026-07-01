@@ -1,0 +1,347 @@
+/* halaman index — style khusus landing page */
+
+/* ---------- hero ---------- */
+
+.st-hero {
+  padding: 84px 0 96px;
+}
+
+.st-hero__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.st-hero__title {
+  font-size: clamp(2.1rem, 4vw, 3.1rem);
+  margin-bottom: 20px;
+}
+
+.st-hero__desc {
+  font-size: 17px;
+  color: var(--st-ink-soft);
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.st-hero__cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+
+.st-hero__stats {
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+
+.st-hero__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.st-hero__stat-num {
+  font-family: var(--st-font-mono);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--st-green-deep);
+}
+
+.st-hero__stat-label {
+  font-size: 12.5px;
+  color: var(--st-ink-soft);
+}
+
+/* ---------- ledger card (signature element) ---------- */
+
+.st-ledger {
+  position: relative;
+  background: var(--st-white);
+  border: var(--st-border);
+  border-radius: var(--st-radius);
+  padding: 26px 26px 30px;
+  box-shadow: 0 24px 48px -28px rgba(13, 83, 14, 0.35);
+  transform: rotate(1.2deg);
+}
+
+.st-ledger__head {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--st-font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--st-ink-soft);
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1.5px dashed rgba(28, 41, 21, 0.25);
+}
+
+.st-ledger__rows li {
+  display: grid;
+  grid-template-columns: 26px 1fr 20px;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  font-size: 14px;
+  border-bottom: 1px dashed rgba(28, 41, 21, 0.12);
+}
+
+.st-ledger__rows li:last-child {
+  border-bottom: none;
+}
+
+.st-ledger__idx {
+  font-family: var(--st-font-mono);
+  font-size: 12px;
+  color: var(--st-green);
+}
+
+.st-ledger__ok {
+  color: var(--st-green);
+  font-weight: 600;
+  text-align: right;
+}
+
+.st-ledger__pending {
+  color: var(--st-ink-soft);
+  text-align: right;
+}
+
+.st-ledger__foot {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--st-font-mono);
+  font-size: 11px;
+  color: var(--st-ink-soft);
+  padding-top: 14px;
+  margin-top: 4px;
+  border-top: 1.5px dashed rgba(28, 41, 21, 0.25);
+}
+
+.st-stamp {
+  position: absolute;
+  right: 18px;
+  bottom: -22px;
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  border: 2.5px solid var(--st-green-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: rotate(-11deg);
+  background: rgba(251, 245, 221, 0.94);
+}
+
+.st-stamp::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid var(--st-green-deep);
+  border-radius: 50%;
+}
+
+.st-stamp span {
+  font-family: var(--st-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--st-green-deep);
+  padding: 0 14px;
+}
+
+/* ---------- roles ---------- */
+
+.st-roles {
+  padding: 96px 0;
+  background: var(--st-khaki);
+}
+
+.st-roles__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.st-role-card {
+  background: var(--st-cream);
+  border-radius: var(--st-radius);
+  padding: 30px 26px;
+  border: var(--st-border);
+}
+
+.st-role-card__badge {
+  display: inline-block;
+  font-family: var(--st-font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--st-cream);
+  background: var(--st-green-deep);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.st-role-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+}
+
+.st-role-card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.st-role-card li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14.5px;
+  color: var(--st-ink-soft);
+}
+
+.st-role-card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--st-green);
+}
+
+/* ---------- flow (timeline) ---------- */
+
+.st-flow {
+  padding: 96px 0;
+  background: var(--st-green-deep);
+}
+
+.st-flow__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.st-flow__item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 22px;
+  padding: 22px 0;
+  border-top: 1px dashed rgba(251, 245, 221, 0.25);
+}
+
+.st-flow__item:last-child {
+  border-bottom: 1px dashed rgba(251, 245, 221, 0.25);
+}
+
+.st-flow__num {
+  font-family: var(--st-font-mono);
+  font-size: 15px;
+  color: var(--st-khaki);
+  padding-top: 2px;
+}
+
+.st-flow__item h4 {
+  color: var(--st-cream);
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.st-flow__item p {
+  color: rgba(251, 245, 221, 0.72);
+  font-size: 14.5px;
+  max-width: 560px;
+}
+
+/* ---------- features ---------- */
+
+.st-features {
+  padding: 96px 0;
+}
+
+.st-features__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.st-feature-card {
+  padding: 26px 22px;
+  border-radius: var(--st-radius);
+  background: var(--st-white);
+  border: var(--st-border);
+}
+
+.st-feature-card h3 {
+  font-size: 1.02rem;
+  margin-bottom: 10px;
+}
+
+.st-feature-card p {
+  font-size: 14px;
+  color: var(--st-ink-soft);
+}
+
+/* ---------- cta ---------- */
+
+.st-cta {
+  padding: 80px 0;
+  background: var(--st-khaki);
+}
+
+.st-cta__inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.st-cta__inner h2 {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  max-width: 560px;
+}
+
+.st-cta__inner p {
+  color: var(--st-ink-soft);
+  margin-bottom: 10px;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 960px) {
+  .st-hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .st-ledger {
+    transform: none;
+    max-width: 460px;
+  }
+
+  .st-roles__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .st-features__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .st-roles__grid,
+  .st-features__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .st-flow__item {
+    grid-template-columns: 40px 1fr;
+  }
+}

@@ -1,62 +1,219 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Petani — SiTani</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-@section('title', 'Dashboard Petani - SIM Tani')
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-@section('content')
-<div class="p-6">
-  <header class="bg-[#0B4619] text-white p-4 rounded-xl shadow-md mb-6 flex justify-between items-center">
-    <div>
-      <h1 class="text-xl font-bold">SIM Kelompok Tani</h1>
-      <p class="text-xs text-[#E6E4B8]">Dashboard Petani</p>
-    </div>
-    <span class="bg-[#2D6A2E] px-3 py-1 rounded text-sm font-semibold">Petani: Pak Joko</span>
-  </header>
+  <!-- Style Sheets -->
+  <link rel="stylesheet" href="{{ asset('css/template.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/petani.css') }}">
+</head>
+<body class="st-dashboard-body">
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="bg-[#E6E4B8] bg-opacity-30 border border-[#E6E4B8] p-6 rounded-xl shadow-sm">
-      <h2 class="text-lg font-bold text-[#0B4619] mb-4 flex items-center gap-2">🌱 Form Registrasi Anggota</h2>
-      <form action="/petani/daftar" method="POST" enctype="multipart/form-data" class="space-y-4">
-        @csrf
-        <div>
-          <label class="block text-sm font-semibold text-[#0B4619] mb-1">Nama Lengkap</label>
-          <input type="text" name="nama" class="w-full p-2.5 rounded bg-white border border-[#E6E4B8] focus:outline-none focus:border-[#2D6A2E]" placeholder="Contoh: Budi Santoso">
+  <!-- Tombol Toggle Sidebar (Mobile) -->
+  <button class="st-dash-toggle" id="stDashToggle" aria-label="Toggle Sidebar">
+    <span class="material-icons">menu</span>
+  </button>
+
+  <div class="st-dash-wrapper">
+    
+    <!-- ============ SIDEBAR NAVIGASI ============ -->
+    <aside class="st-sidebar" id="stSidebar">
+      <div class="st-sidebar__head">
+        <span class="st-nav__mark">SiTani</span>
+        <span class="st-nav__tag">Panel Petani</span>
+      </div>
+      
+      <div class="st-sidebar__user">
+        <div class="st-user-avatar">
+          <span class="material-icons">account_circle</span>
         </div>
         <div>
-          <label class="block text-sm font-semibold text-[#0B4619] mb-1">Luas Lahan (Ha)</label>
-          <input type="number" step="0.1" name="luas_lahan" class="w-full p-2.5 rounded bg-white border border-[#E6E4B8] focus:outline-none focus:border-[#2D6A2E]" placeholder="Contoh: 1.2">
+          <div class="st-user-name">Ahmad Supardi</div>
+          <div class="st-user-meta">ID: 0042/POKTAN</div>
         </div>
-        <div>
-          <label class="block text-sm font-semibold text-[#0B4619] mb-1">Dokumen Pendukung</label>
-          <input type="file" name="dokumen" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#2D6A2E] file:text-white hover:file:bg-[#0B4619]">
-        </div>
-        <button type="submit" class="w-full bg-[#2D6A2E] hover:bg-[#0B4619] text-white font-bold py-2 px-4 rounded transition-all shadow">Kirim Pendaftaran</button>
-      </form>
-    </div>
+      </div>
 
-    <div class="bg-white border-2 border-[#2D6A2E] p-6 rounded-xl shadow-md">
-      <h2 class="text-lg font-bold text-[#2D6A2E] mb-4 flex items-center gap-2">🌾 Input Hasil Panen Musim Ini</h2>
-      <form action="/petani/panen" method="POST" class="space-y-4">
-        @csrf
+      <nav class="st-sidebar__nav">
+        <a href="#ringkasan" class="st-sidebar__link is-active">
+          <span class="material-icons st-sidebar__icon">dashboard</span> Ringkasan Tani
+        </a>
+        <a href="#input-panen" class="st-sidebar__link" id="triggerFormPanen">
+          <span class="material-icons st-sidebar__icon">grass</span> Input Hasil Panen
+        </a>
+        <a href="#riwayat" class="st-sidebar__link">
+          <span class="material-icons st-sidebar__icon">history_edu</span> Riwayat Verifikasi
+        </a>
+      </nav>
+
+      <div class="st-sidebar__foot">
+        <a href="{{ url('/') }}" class="st-btn st-btn--outline st-logout-btn">
+          <span class="material-icons" style="font-size: 16px;">logout</span> Keluar Sistem
+        </a>
+      </div>
+    </aside>
+
+    <!-- ============ KONTEN UTAMA ============ -->
+    <main class="st-dash-main">
+      
+      <!-- Header Dashboard -->
+      <header class="st-dash-header">
         <div>
-          <label class="block text-sm font-semibold text-[#0B4619] mb-1">Komoditas</label>
-          <select name="komoditas" class="w-full p-2.5 rounded bg-[#FDFBF0] border border-[#E6E4B8] focus:outline-none focus:border-[#2D6A2E]">
-            <option value="padi">Padi IR64</option>
-            <option value="jagung">Jagung Hibrida</option>
-          </select>
+          <h1 class="st-dash-title">Selamat Datang, Pak Ahmad</h1>
+          <p class="st-dash-subtitle">Pantau lahan, laporkan hasil panen bumi, dan cek transparansi distribusi bagi hasil kelompok.</p>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-semibold text-[#0B4619] mb-1">Jumlah (Kg)</label>
-            <input type="number" name="jumlah" class="w-full p-2.5 rounded bg-[#FDFBF0] border border-[#E6E4B8] focus:outline-none focus:border-[#2D6A2E]" placeholder="1500">
+        <div class="st-status-badge st-status-badge--success">
+          <span class="material-icons" style="font-size: 14px;">verified</span> Lahan Terverifikasi
+        </div>
+      </header>
+
+      <!-- Grid Statistik Utama (Cards) -->
+      <section class="st-dash-grid" id="ringkasan">
+        
+        <div class="st-dash-card">
+          <div class="st-card-header">
+            <span class="st-card-label">Total Setor Panen</span>
+            <span class="material-icons st-card-icon st-icon--green">inventory_2</span>
           </div>
-          <div>
-            <label class="block text-sm font-semibold text-[#0B4619] mb-1">Musim Tanam</label>
-            <input type="text" name="musim" class="w-full p-2.5 rounded bg-[#FDFBF0] border border-[#E6E4B8] focus:outline-none focus:border-[#2D6A2E]" placeholder="Gadu 2026">
+          <div class="st-card-value">3.450 <span class="st-card-unit">Kg</span></div>
+          <div class="st-card-sub text-mono">Musim Tanam I & II</div>
+        </div>
+
+        <div class="st-dash-card">
+          <div class="st-card-header">
+            <span class="st-card-label">Estimasi Bagi Hasil</span>
+            <span class="material-icons st-card-icon st-icon--amber">payments</span>
+          </div>
+          <div class="st-card-value"><span class="st-card-unit">Rp</span> 4.250.000</div>
+          <div class="st-card-sub text-mono text-success">Terverifikasi Pengurus</div>
+        </div>
+
+        <div class="st-dash-card">
+          <div class="st-card-header">
+            <span class="st-card-label">Menunggu Verifikasi</span>
+            <span class="material-icons st-card-icon st-icon--blue">pending_actions</span>
+          </div>
+          <div class="st-card-value">1.250 <span class="st-card-unit">Kg</span></div>
+          <div class="st-card-sub text-mono text-muted">1 Berkas Nota</div>
+        </div>
+        
+      </section>
+
+      <!-- Area Form Input & Riwayat Kerja -->
+      <section class="st-dash-sections">
+        
+        <!-- Form Pencatatan Panen Baru -->
+        <div class="st-form-section" id="input-panen">
+          <div class="st-section-header">
+            <span class="material-icons text-success">add_box</span>
+            <h3 class="st-section-sub">Laporkan Hasil Panen Baru</h3>
+          </div>
+          <p class="st-form-tip">Pastikan timbangan berat gabah/komoditas basah telah disaksikan perwakilan kelompok tani.</p>
+          
+          <form action="#" method="POST" class="st-minimal-form" onsubmit="event.preventDefault();">
+            <div class="st-form-group">
+              <label for="komoditas">Komoditas Hasil Bumi</label>
+              <select id="komoditas" name="komoditas" required>
+                <option value="padi">Padi (Gabah Kering Giling)</option>
+                <option value="jagung">Jagung Manis</option>
+                <option value="kedelai">Kedelai Hitam</option>
+              </select>
+            </div>
+
+            <div class="st-form-row">
+              <div class="st-form-group">
+                <label for="berat">Berat Bersih (Kilogram)</label>
+                <input type="number" id="berat" name="berat" placeholder="Contoh: 1250" required>
+              </div>
+              <div class="st-form-group">
+                <label for="musim">Periode Musim Tanam</label>
+                <select id="musim" name="musim" required>
+                  <option value="2026-1">Musim I — 2026</option>
+                  <option value="2026-2">Musim II — 2026</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="st-btn st-btn--solid st-submit-dash">
+              <span class="material-icons" style="font-size: 18px;">send</span> Kirim Data ke Pengurus
+            </button>
+          </form>
+        </div>
+
+        <!-- Tabel Riwayat Pencatatan Baku -->
+        <div class="st-table-section" id="riwayat">
+          <div class="st-section-header">
+            <span class="material-icons text-muted">receipt_long</span>
+            <h3 class="st-section-sub">Riwayat Verifikasi Nota Panen</h3>
+          </div>
+          <div class="st-table-responsive">
+            <table class="st-ledger-table">
+              <thead>
+                <tr>
+                  <th>No. Nota</th>
+                  <th>Tanggal</th>
+                  <th>Komoditas</th>
+                  <th>Jumlah</th>
+                  <th>Musim</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-mono font-bold">#0042/PD</td>
+                  <td>12 Juni 2026</td>
+                  <td>Padi</td>
+                  <td class="text-mono font-bold">1.250 Kg</td>
+                  <td>Musim I</td>
+                  <td>
+                    <span class="st-badge st-badge--pending">
+                      <span class="material-icons">hourglass_empty</span> Menunggu
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-mono font-bold">#0039/PD</td>
+                  <td>14 April 2026</td>
+                  <td>Padi</td>
+                  <td class="text-mono font-bold">2.200 Kg</td>
+                  <td>Musim I</td>
+                  <td>
+                    <span class="st-badge st-badge--success">
+                      <span class="material-icons">check_circle</span> Disetujui
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-mono font-bold">#0012/JG</td>
+                  <td>10 Jan 2026</td>
+                  <td>Jagung</td>
+                  <td class="text-mono font-bold">950 Kg</td>
+                  <td>Musim II (2025)</td>
+                  <td>
+                    <span class="st-badge st-badge--danger">
+                      <span class="material-icons">cancel</span> Ditolak
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        <button type="submit" class="w-full bg-[#0B4619] hover:bg-[#2D6A2E] text-white font-bold py-2 px-4 rounded transition-all shadow">Kirim Data Panen</button>
-      </form>
-    </div>
+
+      </section>
+    </main>
+
   </div>
-</div>
-@endsection
+
+  <script src="{{ asset('js/main.js') }}"></script>
+</body>
+</html>
