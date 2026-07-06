@@ -2,8 +2,6 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="{{ asset('images/logo-sitani-256.png') }}">
-  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SiTani — Sistem Manajemen Kelompok Tani</title>
   <meta name="description" content="SiTani membantu kelompok tani mencatat pendaftaran anggota, hasil panen, distribusi, dan bagi hasil dalam satu sistem terverifikasi.">
@@ -11,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ asset('css/template.css') }}">
   <link rel="stylesheet" href="{{ asset('css/index.css') }}">
@@ -50,21 +47,21 @@
 
           <div class="st-hero__stats">
             <div class="st-hero__stat">
-              <span class="st-hero__stat-ic"><span class="material-icons">groups</span></span>
+              <span class="st-hero__stat-ic">👥</span>
               <span class="st-hero__stat-text">
                 <span class="st-hero__stat-num">3</span>
                 <span class="st-hero__stat-label">peran pengguna</span>
               </span>
             </div>
             <div class="st-hero__stat">
-              <span class="st-hero__stat-ic"><span class="material-icons">verified_user</span></span>
+              <span class="st-hero__stat-ic">🔒</span>
               <span class="st-hero__stat-text">
                 <span class="st-hero__stat-num">2×</span>
                 <span class="st-hero__stat-label">lapis verifikasi</span>
               </span>
             </div>
             <div class="st-hero__stat">
-              <span class="st-hero__stat-ic"><span class="material-icons">description</span></span>
+              <span class="st-hero__stat-ic">📄</span>
               <span class="st-hero__stat-text">
                 <span class="st-hero__stat-num">PDF/XLS</span>
                 <span class="st-hero__stat-label">ekspor laporan</span>
@@ -82,11 +79,11 @@
             </div>
 
             <ul class="st-ledger__rows">
-              <li><span class="st-ledger__idx">01</span><span>Pendaftaran anggota petani</span><span class="st-ledger__ok"><span class="material-icons">check</span></span></li>
-              <li><span class="st-ledger__idx">02</span><span>Verifikasi oleh pengurus</span><span class="st-ledger__ok"><span class="material-icons">check</span></span></li>
-              <li><span class="st-ledger__idx">03</span><span>Input panen — Padi, 1.250 kg</span><span class="st-ledger__ok"><span class="material-icons">check</span></span></li>
-              <li><span class="st-ledger__idx">04</span><span>Distribusi ke pembeli</span><span class="st-ledger__ok"><span class="material-icons">check</span></span></li>
-              <li><span class="st-ledger__idx">05</span><span>Bagi hasil proporsional</span><span class="st-ledger__pending"><span class="material-icons">more_horiz</span></span></li>
+              <li><span class="st-ledger__idx">01</span><span>Pendaftaran anggota petani</span><span class="st-ledger__ok">✓</span></li>
+              <li><span class="st-ledger__idx">02</span><span>Verifikasi oleh pengurus</span><span class="st-ledger__ok">✓</span></li>
+              <li><span class="st-ledger__idx">03</span><span>Input panen — Padi, 1.250 kg</span><span class="st-ledger__ok">✓</span></li>
+              <li><span class="st-ledger__idx">04</span><span>Distribusi ke pembeli</span><span class="st-ledger__ok">✓</span></li>
+              <li><span class="st-ledger__idx">05</span><span>Bagi hasil proporsional</span><span class="st-ledger__pending">…</span></li>
             </ul>
 
             <div class="st-ledger__foot">
@@ -102,7 +99,7 @@
           <div class="st-hero-insight">
             <div class="st-hero-insight__label">Tren Panen</div>
             <div class="st-hero-insight__num">+18%</div>
-            <p class="st-hero-insight__desc">dibanding musim sebelumnya</p>
+            <canvas id="chartHeroMini"></canvas>
           </div>
         </div>
 
@@ -212,24 +209,58 @@
 
         <div class="st-features__grid">
           <div class="st-feature-card" data-reveal>
-            <span class="st-feature-card__ic"><span class="material-icons">verified</span></span>
+            <span class="st-feature-card__ic">🛡️</span>
             <h3>Verifikasi berlapis</h3>
             <p>Setiap pendaftaran dan laporan panen melewati persetujuan pengurus sebelum tercatat resmi.</p>
           </div>
           <div class="st-feature-card" data-reveal>
-            <span class="st-feature-card__ic"><span class="material-icons">handshake</span></span>
+            <span class="st-feature-card__ic">🤝</span>
             <h3>Bagi hasil proporsional</h3>
             <p>Perhitungan otomatis berdasarkan kontribusi panen tiap anggota, bukan tebak-tebakan manual.</p>
           </div>
           <div class="st-feature-card" data-reveal>
-            <span class="st-feature-card__ic"><span class="material-icons">trending_up</span></span>
+            <span class="st-feature-card__ic">📈</span>
             <h3>Laporan &amp; grafik tren</h3>
             <p>Produktivitas per anggota, komoditas, dan musim, siap diekspor ke PDF atau Excel.</p>
           </div>
           <div class="st-feature-card" data-reveal>
-            <span class="st-feature-card__ic"><span class="material-icons">notifications_active</span></span>
+            <span class="st-feature-card__ic">🔔</span>
             <h3>Notifikasi status</h3>
             <p>Petani mendapat kabar setiap kali pendaftaran, panen, atau bagi hasil diproses.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GRAFIK / STATISTIK ============ -->
+    <section class="st-stats" id="grafik" data-nav-class="st-nav--khaki">
+      <div class="st-container">
+        <p class="st-eyebrow">Grafik &amp; Statistik</p>
+        <h2 class="st-section-title">Perkembangan kelompok tani, terlihat jelas dalam angka</h2>
+
+        <div class="st-stats__grid">
+          <div class="st-stats__card" data-reveal>
+            <div class="st-stats__card-head">
+              <h3>Produktivitas Panen per Musim</h3>
+              <span class="st-badge st-badge--success">+18% musim ini</span>
+            </div>
+            <canvas id="chartPanen" height="220"></canvas>
+          </div>
+
+          <div class="st-stats__card" data-reveal>
+            <div class="st-stats__card-head">
+              <h3>Pertumbuhan Anggota</h3>
+              <span class="st-badge st-badge--success">42 anggota aktif</span>
+            </div>
+            <canvas id="chartAnggota" height="220"></canvas>
+          </div>
+
+          <div class="st-stats__card st-stats__card--wide" data-reveal>
+            <div class="st-stats__card-head">
+              <h3>Komposisi Komoditas Terdistribusi</h3>
+              <span class="st-badge st-badge--pending">Musim I · 2026</span>
+            </div>
+            <canvas id="chartKomoditas" height="140"></canvas>
           </div>
         </div>
       </div>
@@ -244,7 +275,7 @@
         <div class="st-edu__grid">
           <article class="st-edu-card" data-reveal>
             <div class="st-edu-card__banner st-edu-card__banner--a">
-              <span class="material-icons">grass</span>
+              <span>🌾</span>
             </div>
             <div class="st-edu-card__body">
               <span class="st-edu-card__tag">Budidaya</span>
@@ -258,7 +289,7 @@
 
           <article class="st-edu-card" data-reveal>
             <div class="st-edu-card__banner st-edu-card__banner--b">
-              <span class="material-icons">pest_control</span>
+              <span>🐛</span>
             </div>
             <div class="st-edu-card__body">
               <span class="st-edu-card__tag">Hama &amp; Penyakit</span>
@@ -272,7 +303,7 @@
 
           <article class="st-edu-card" data-reveal>
             <div class="st-edu-card__banner st-edu-card__banner--c">
-              <span class="material-icons">payments</span>
+              <span>💰</span>
             </div>
             <div class="st-edu-card__body">
               <span class="st-edu-card__tag">Bagi Hasil</span>
@@ -286,7 +317,7 @@
 
           <article class="st-edu-card" data-reveal>
             <div class="st-edu-card__banner st-edu-card__banner--d">
-              <span class="material-icons">agriculture</span>
+              <span>🚜</span>
             </div>
             <div class="st-edu-card__body">
               <span class="st-edu-card__tag">Teknologi Tani</span>
@@ -353,14 +384,14 @@
         <div>
           <p class="st-eyebrow">FAQ</p>
           <h2 class="st-section-title">Pertanyaan yang sering diajukan</h2>
-          <p class="st-faq__desc">Tidak menemukan jawabannya? Hubungi pengurus kelompok tani Anda secara langsung.</p>
+          <p class="st-faq__desc">Tidak menemukan jawabannya? Gunakan fitur chat untuk bertanya langsung ke pengurus atau petani lain.</p>
         </div>
 
         <div class="st-faq__list">
           <div class="st-faq-item is-open">
             <button class="st-faq-item__q" type="button">
               <span>Bagaimana cara mendaftar sebagai anggota kelompok tani?</span>
-              <span class="st-faq-item__icon"><span class="material-icons">add</span></span>
+              <span class="st-faq-item__icon">＋</span>
             </button>
             <div class="st-faq-item__a">
               <p>Klik tombol "Daftar Kelompok" di navbar, isi data diri dan data lahan, lalu tunggu verifikasi dari pengurus kelompok tani Anda.</p>
@@ -370,7 +401,7 @@
           <div class="st-faq-item">
             <button class="st-faq-item__q" type="button">
               <span>Berapa lama proses verifikasi hasil panen?</span>
-              <span class="st-faq-item__icon"><span class="material-icons">add</span></span>
+              <span class="st-faq-item__icon">＋</span>
             </button>
             <div class="st-faq-item__a">
               <p>Verifikasi dilakukan oleh pengurus setelah data panen diinput. Umumnya diproses dalam 1–2 hari kerja tergantung aktivitas pengurus kelompok.</p>
@@ -380,7 +411,7 @@
           <div class="st-faq-item">
             <button class="st-faq-item__q" type="button">
               <span>Apakah bagi hasil dihitung otomatis oleh sistem?</span>
-              <span class="st-faq-item__icon"><span class="material-icons">add</span></span>
+              <span class="st-faq-item__icon">＋</span>
             </button>
             <div class="st-faq-item__a">
               <p>Ya, bagi hasil dihitung secara proporsional berdasarkan kontribusi hasil panen tiap anggota yang sudah disetujui pengurus.</p>
@@ -390,7 +421,7 @@
           <div class="st-faq-item">
             <button class="st-faq-item__q" type="button">
               <span>Bisakah laporan diekspor ke PDF atau Excel?</span>
-              <span class="st-faq-item__icon"><span class="material-icons">add</span></span>
+              <span class="st-faq-item__icon">＋</span>
             </button>
             <div class="st-faq-item__a">
               <p>Bisa. Admin dan pengurus dapat mengekspor laporan produktivitas dan distribusi ke format PDF maupun Excel kapan saja.</p>
@@ -399,11 +430,11 @@
 
           <div class="st-faq-item">
             <button class="st-faq-item__q" type="button">
-              <span>Bagaimana hasil panen yang sudah disetujui didistribusikan?</span>
-              <span class="st-faq-item__icon"><span class="material-icons">add</span></span>
+              <span>Bagaimana cara menghubungi petani atau pengurus lain?</span>
+              <span class="st-faq-item__icon">＋</span>
             </button>
             <div class="st-faq-item__a">
-              <p>Pengurus mencatat distribusi hasil panen yang telah disetujui ke pasar tujuan langsung dari dashboard Pengurus, lengkap dengan harga jual dan nilai transaksinya.</p>
+              <p>Gunakan ikon chat pada navbar atau tombol chat mengambang di pojok kanan bawah halaman untuk mengirim pesan langsung.</p>
             </div>
           </div>
         </div>
@@ -423,6 +454,37 @@
   <!-- ============ FOOTER ============ -->
 <x-footer />
 
+  <!-- ============ CHAT WIDGET (Chat ke Petani/Pengurus) ============ -->
+  <div class="st-chat" id="stChatWidget">
+    <button class="st-chat__fab" id="stChatFab" aria-label="Buka chat petani">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H8l-4 4V5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+      <span class="st-chat__fab-dot"></span>
+    </button>
+
+    <div class="st-chat__panel" id="stChatPanel" hidden>
+      <div class="st-chat__head">
+        <div>
+          <strong>Chat Petani &amp; Pengurus</strong>
+          <span><i></i>Online — biasanya balas cepat</span>
+        </div>
+        <button class="st-chat__close" id="stChatClose" aria-label="Tutup chat">✕</button>
+      </div>
+
+      <div class="st-chat__body" id="stChatBody">
+        <div class="st-chat__msg st-chat__msg--in">
+          Halo! 👋 Selamat datang di SiTani. Ada yang bisa dibantu seputar pendaftaran, panen, atau bagi hasil?
+        </div>
+      </div>
+
+      <form class="st-chat__input" id="stChatForm">
+        <input type="text" id="stChatInput" placeholder="Tulis pesan..." autocomplete="off">
+        <button type="submit" aria-label="Kirim pesan">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 12 20 4l-6 16-2.5-7L4 12Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <script>
     window.SITANI_CSRF_TOKEN = "{{ csrf_token() }}";
     window.SITANI_PUSHER_KEY = "{{ config('broadcasting.connections.pusher.key') }}";
@@ -433,6 +495,7 @@
   </script>
   <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.16.1/dist/echo.iife.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
   <script src="{{ asset('js/realtime.js') }}"></script>
   <script src="{{ asset('js/main.js') }}"></script>
 </body>

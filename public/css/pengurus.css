@@ -1,0 +1,376 @@
+/* halaman dashboard pengurus */
+
+.st-dashboard-body {
+  background: var(--st-cream); /* Mengikuti warna cream hangat index utama */
+  margin: 0;
+  font-family: var(--st-font-body);
+  color: var(--st-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.st-dash-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar Bawaan SiTani ---------- */
+.st-sidebar {
+  width: 280px;
+  background: var(--st-green-deep);
+  border-right: 1px solid rgba(28, 41, 21, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 45;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.st-sidebar__head {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 36px;
+}
+
+.st-sidebar__logo-img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+}
+
+.st-sidebar__head .st-nav__mark {
+  color: var(--st-white);
+  font-family: var(--st-font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.st-sidebar__head .st-nav__tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.st-sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--st-radius);
+  margin-bottom: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.st-user-avatar { color: var(--st-white); display: flex; align-items: center; }
+.st-user-avatar .material-icons { font-size: 36px; color: var(--st-khaki); }
+.st-user-name { color: var(--st-white); font-weight: 600; font-size: 15px; }
+.st-user-meta { color: var(--st-khaki); opacity: 0.7; font-size: 12px; font-family: var(--st-font-mono); }
+
+.st-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.st-sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--st-khaki);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.st-sidebar__link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--st-white);
+}
+
+.st-sidebar__link.is-active {
+  background: var(--st-white);
+  color: var(--st-green-deep);
+  font-weight: 600;
+}
+
+.st-sidebar__foot {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.st-logout-btn {
+  width: 100%;
+  justify-content: center;
+  color: #fca5a5 !important;
+  border-color: rgba(252, 165, 165, 0.3) !important;
+}
+
+.st-logout-btn:hover {
+  background: rgba(239, 68, 68, 0.1) !important;
+}
+
+/* ---------- Konten Utama ---------- */
+.st-dash-main {
+  flex-grow: 1;
+  margin-left: 280px;
+  padding: 48px 40px;
+  max-width: calc(100% - 280px);
+}
+
+.st-dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+  border-bottom: var(--st-border);
+  padding-bottom: 24px;
+}
+
+.st-dash-title {
+  margin: 0 0 6px 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.st-dash-subtitle {
+  margin: 0;
+  color: var(--st-ink-soft);
+  max-width: 700px;
+}
+
+/* Grid Dashboard */
+.st-dash-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.st-stat-card {
+  background: var(--st-white);
+  border: var(--st-border);
+  border-radius: var(--st-radius);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.st-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.st-stat-icon .material-icons { font-size: 24px; }
+.card-icon-green { background: var(--st-success-bg); color: var(--st-success); }
+.card-icon-yellow { background: var(--st-amber-bg); color: var(--st-amber); }
+.card-icon-blue { background: var(--st-blue-bg); color: var(--st-blue); }
+
+.st-stat-info { display: flex; flex-direction: column; }
+.st-stat-label { font-size: 13px; color: var(--st-ink-soft); font-weight: 500; }
+.st-stat-value { margin: 4px 0 0 0; font-family: var(--st-font-display); font-size: 20px; font-weight: 700; }
+
+/* Komponen Tabel Aksi */
+.st-table-section {
+  background: var(--st-white);
+  border: var(--st-border);
+  border-radius: var(--st-radius);
+  padding: 32px;
+}
+
+.st-section-header { margin-bottom: 24px; }
+.st-section-title { margin: 0 0 4px 0; font-size: 20px; font-weight: 700; }
+.st-section-subtitle { margin: 0; color: var(--st-ink-soft); font-size: 14px; }
+
+.st-table-responsive { width: 100%; overflow-x: auto; }
+.st-table { width: 100%; border-collapse: collapse; text-align: left; }
+.st-table th { padding: 12px 16px; border-bottom: 2px solid rgba(28, 41, 21, 0.08); color: var(--st-ink-soft); font-weight: 600; font-size: 14px; }
+.st-table td { padding: 16px; border-bottom: 1px solid rgba(28, 41, 21, 0.06); font-size: 15px; }
+
+/* Tombol Keputusan */
+.st-action-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.st-action-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.1s ease;
+}
+
+.st-action-btn:hover { transform: scale(1.1); }
+.btn-approve { color: var(--st-success); }
+.btn-reject { color: var(--st-red); }
+
+/* Responsive HP */
+.st-dash-toggle {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .st-dash-grid { grid-template-columns: 1fr; }
+  .st-dash-main { margin-left: 0; max-width: 100%; padding: 100px 20px 40px 20px; }
+  .st-sidebar { transform: translateX(-100%); }
+  .st-sidebar.is-open { transform: translateX(0); }
+
+  .st-dash-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 50;
+    background: var(--st-green-deep);
+    color: var(--st-white);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(13, 83, 14, 0.2);
+  }
+}
+/* ============ Alert Notifikasi ============ */
+.st-alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.st-alert--success {
+  background: rgba(48, 109, 41, 0.1);
+  border: 1px solid var(--st-green);
+  color: var(--st-green-deep);
+}
+
+.st-alert--danger {
+  background: rgba(200, 40, 40, 0.08);
+  border: 1px solid #c82828;
+  color: #a11f1f;
+}
+
+/* ============ Aksi Verifikasi (Setujui / Tolak) ============ */
+.st-verify-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.st-verify-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.st-verify-input {
+  width: 120px;
+  padding: 6px 8px;
+  border: var(--st-border);
+  border-radius: 8px;
+  font-family: var(--st-font-mono);
+  font-size: 13px;
+  color: var(--st-ink);
+}
+
+.st-verify-input:focus {
+  outline: none;
+  border-color: var(--st-green);
+}
+
+/* ============ Badge peran Pengurus di sidebar (selaras palet bersama) ============ */
+.st-nav__tag--pengurus {
+  background: var(--st-amber);
+  color: var(--st-white);
+}
+
+/* ============ Form Distribusi Hasil Panen ke Pasar ============ */
+.st-distribusi-form {
+  margin-top: 4px;
+  padding-bottom: 20px;
+  border-bottom: var(--st-border);
+}
+
+.st-distribusi-form__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.st-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--st-ink-soft);
+}
+
+.st-form-field--wide {
+  grid-column: span 3;
+}
+
+.st-form-field input,
+.st-form-field select {
+  padding: 9px 10px;
+  border: var(--st-border);
+  border-radius: 8px;
+  font-family: var(--st-font-body);
+  font-size: 13.5px;
+  color: var(--st-ink);
+  background: var(--st-white);
+}
+
+.st-form-field input:focus,
+.st-form-field select:focus {
+  outline: none;
+  border-color: var(--st-green);
+}
+
+@media (max-width: 860px) {
+  .st-distribusi-form__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .st-form-field--wide {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .st-distribusi-form__grid {
+    grid-template-columns: 1fr;
+  }
+  .st-form-field--wide {
+    grid-column: span 1;
+  }
+}

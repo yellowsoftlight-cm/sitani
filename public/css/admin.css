@@ -1,0 +1,234 @@
+/* halaman dashboard admin — mengikuti design system SiTani (template.css) */
+
+/* ---------- Tombol toggle sidebar mobile ---------- */
+/* Catatan: sebelumnya hanya ada di petani.css, ditambahkan di sini juga
+   supaya dashboard Admin & Pengurus punya perilaku mobile yang sama persis. */
+.st-dash-toggle {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .st-dash-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 50;
+    background: var(--st-green-deep);
+    color: var(--st-white);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(13, 83, 14, 0.2);
+  }
+}
+
+.st-badge-role {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--st-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.st-badge-role--admin { background: var(--st-purple-bg); color: var(--st-purple); }
+.st-badge-role--pengurus { background: var(--st-amber-bg); color: var(--st-amber); }
+.st-badge-role--petani { background: var(--st-success-bg); color: var(--st-success); }
+
+.card-icon-purple { background: var(--st-purple-bg); color: var(--st-purple); }
+.card-icon-red { background: var(--st-red-bg); color: var(--st-red); }
+
+/* ---------- Kelola Pengguna ---------- */
+.st-role-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.st-role-select {
+  padding: 7px 10px;
+  border: var(--st-border);
+  border-radius: 8px;
+  font-family: var(--st-font-body);
+  font-size: 13px;
+  color: var(--st-ink);
+  background: #fafaf7;
+}
+
+.st-role-select:focus {
+  outline: none;
+  border-color: var(--st-green-deep);
+}
+
+.st-icon-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: inline-flex;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.st-icon-btn:hover { transform: scale(1.08); }
+.st-icon-btn--save { color: var(--st-success); background: var(--st-success-bg); }
+.st-icon-btn--danger { color: var(--st-red); background: var(--st-red-bg); }
+
+.st-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Filter status data panen ---------- */
+.st-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.st-filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.st-filter-tab {
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  border: var(--st-border);
+  color: var(--st-ink-soft);
+  background: var(--st-white);
+}
+
+.st-filter-tab.is-active {
+  background: var(--st-green-deep);
+  color: var(--st-cream);
+  border-color: var(--st-green-deep);
+}
+
+.st-filter-tab:hover:not(.is-active) {
+  border-color: var(--st-green-deep);
+  color: var(--st-green-deep);
+}
+
+.st-export-btn {
+  text-decoration: none;
+}
+
+/* ---------- Komoditas mini list ---------- */
+.st-mini-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.st-mini-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #fafaf7;
+  border: var(--st-border);
+}
+
+.st-mini-item strong { font-size: 14px; }
+.st-mini-item span { font-family: var(--st-font-mono); font-size: 12.5px; color: var(--st-ink-soft); }
+
+/* ---------- Pagination ---------- */
+.st-pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.st-pagination nav > div {
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- Layout dua kolom untuk ringkasan tambahan ---------- */
+.st-two-col {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 992px) {
+  .st-two-col { grid-template-columns: 1fr; }
+}
+
+/* ======================================================
+   Halaman Login Khusus Admin (tersembunyi, tidak publik)
+   ====================================================== */
+.st-auth-body--admin {
+  background: var(--st-green-deep);
+  background-image: radial-gradient(circle at top, rgba(255,255,255,0.06), transparent 60%);
+}
+
+.st-auth-card--admin {
+  background: #0a3f0b;
+  border: 1px solid rgba(251, 245, 221, 0.14);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+.st-auth-card--admin .st-auth-group label {
+  color: var(--st-khaki);
+}
+
+.st-auth-card--admin .st-auth-group input {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(251, 245, 221, 0.18);
+  color: var(--st-cream);
+}
+
+.st-auth-card--admin .st-auth-group input:focus {
+  border-color: var(--st-khaki);
+  background: rgba(255,255,255,0.1);
+}
+
+.st-admin-lock {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(251, 245, 221, 0.1);
+  color: var(--st-khaki);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.st-admin-lock .material-icons { font-size: 28px; }
+
+.st-admin-warning {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--st-khaki);
+  opacity: 0.85;
+  margin: 0 0 22px;
+  line-height: 1.5;
+}
+
+.st-admin-submit {
+  background: var(--st-khaki);
+  color: var(--st-green-deep);
+}
+
+.st-admin-submit:hover {
+  background: var(--st-cream);
+}

@@ -35,6 +35,16 @@
     flex-direction: column;
     margin-bottom: 36px;
   }
+
+  .st-sidebar__logo-img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 3px;
+  }
   
   .st-sidebar__head .st-nav__mark {
     color: var(--st-white); /* Teks brand utama menjadi putih */
@@ -245,7 +255,7 @@
   }
   
   .st-icon--green { color: var(--st-green); }
-  .st-icon--amber { color: #b7791f; }
+  .st-icon--amber { color: var(--st-amber); }
   .st-icon--blue { color: #2b6cb0; }
   
   .st-card-value {
@@ -420,3 +430,23 @@
       box-shadow: 0 4px 12px rgba(13, 83, 14, 0.2);
     }
   }
+/* ============ Alert Notifikasi (Sukses / Error) ============ */
+.st-alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.st-alert--success {
+  background: rgba(48, 109, 41, 0.1);
+  border: 1px solid var(--st-green);
+  color: var(--st-green-deep);
+}
+
+.st-alert--danger {
+  background: rgba(200, 40, 40, 0.08);
+  border: 1px solid #c82828;
+  color: #a11f1f;
+}

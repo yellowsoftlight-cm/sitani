@@ -7,10 +7,11 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -28,5 +29,22 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Data hasil panen milik petani ini.
+     * Untuk user baru, relasi ini akan kosong (tidak ada data dummy).
+     */
+    public function panens(): HasMany
+    {
+        return $this->hasMany(Panen::class);
+    }
+
+    /**
+     * Seluruh notifikasi milik user ini, terbaru dulu.
+     */
+    public function notifikasis(): HasMany
+    {
+        return $this->hasMany(Notifikasi::class)->latest();
     }
 }

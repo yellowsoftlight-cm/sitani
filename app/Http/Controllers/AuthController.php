@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\NotifikasiService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,13 +23,33 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            // PENTING: akun berrole Admin sengaja TIDAK boleh masuk lewat
+            // form login publik ini. Panel admin hanya dapat diakses lewat
+            // jalur login khusus yang tidak ditautkan di halaman manapun,
+            // sehingga hanya admin yang mengetahui URL-nya yang bisa login.
+            if (Auth::user()->role === 'Admin') {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return back()->withErrors([
+                    'email' => 'Akun ini tidak dapat masuk melalui halaman ini.',
+                ]);
+            }
+
             $request->session()->regenerate();
-            
-            // Redirect sesuai role masing-masing aktor
+
+            // PENTING: redirect selalu berdasarkan role pengguna yang login,
+            // bukan redirect()->intended(), karena intended() bisa mengarahkan
+            // ke URL panel lain yang sempat dicoba diakses sebelumnya (mis. akun
+            // Petani yang tadinya mencoba membuka /pengurus/dashboard tanpa izin),
+            // sehingga panel yang terbuka tidak sinkron dengan role akun tersebut.
             $role = Auth::user()->role;
-            if ($role === 'Admin') return redirect()->intended('/admin/dashboard');
-            if ($role === 'Pengurus') return redirect()->intended('/pengurus/dashboard');
-            return redirect()->intended('/petani/dashboard');
+
+            return match ($role) {
+                'Pengurus' => redirect('/pengurus/dashboard'),
+                default => redirect('/petani/dashboard'),
+            };
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.']);
@@ -54,6 +75,15 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'role' => $request->role,
         ]);
+
+        if ($request->role === 'Petani') {
+            NotifikasiService::kirimKeRole(
+                'Pengurus',
+                'anggota_baru',
+                'Anggota baru mendaftar',
+                "{$request->name} mendaftar sebagai anggota Petani baru.",
+            );
+        }
 
         return redirect()->route('login')->with('success', 'Pendaftaran berhasil! Silakan login.');
     }
